@@ -5,6 +5,8 @@
  */
 package edu.eci.arsw.blueprints.persistence;
 
+import java.util.Set;
+
 import edu.eci.arsw.blueprints.model.Blueprint;
 
 /**
@@ -29,5 +31,24 @@ public interface BlueprintsPersistence {
      * @throws BlueprintNotFoundException if there is no such blueprint
      */
     public Blueprint getBlueprint(String author,String bprintname) throws BlueprintNotFoundException;
-    
+
+     /**
+     * Method that search blueprints by author
+     * 
+     * @param author author´s name
+     * @return ArrayList of BluePrints
+     * @throws BlueprintNotFoundException if there is no such blueprint
+     */
+    public Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException;
+
+     /**
+     * 
+     * @return All blueprints
+     * @throws BlueprintNotFoundException if there is no such blueprints
+     */
+    public Set<Blueprint> getAllBlueprints() throws BlueprintNotFoundException;
+
+
 }
+
+

@@ -1,0 +1,25 @@
+package edu.eci.arsw.blueprints.persistence.impl;
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.eci.arsw.blueprints.model.Blueprint;
+import edu.eci.arsw.blueprints.model.Point;
+import edu.eci.arsw.blueprints.persistence.Filter;
+
+//@Service
+public class Subsampling implements Filter{
+
+    @Override
+    public Blueprint applyFilter(Blueprint bp) {
+        List<Point> originalPoints = bp.getPoints();
+        List<Point> newPoints= new ArrayList<>();
+        for(int i = 0; i< originalPoints.size(); i+=2){
+            newPoints.add(originalPoints.get(i));
+        }
+        bp.setPoints(newPoints);
+        return bp;
+    }
+    
+}
