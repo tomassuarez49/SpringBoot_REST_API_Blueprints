@@ -28,7 +28,6 @@ public class BlueprintsServices {
     Filter filter;
     
     public void addNewBlueprint(Blueprint bp){
-<<<<<<< HEAD
         try {
             bpp.saveBlueprint(bp);
         } catch (Exception e) {
@@ -46,13 +45,6 @@ public class BlueprintsServices {
         }
         return blueprints;
     
-=======
-        bpp.saveBlueprint(bp);
-    }
-    
-    public Set<Blueprint> getAllBlueprints(){
-        return bpp.getAllBlueprints();
->>>>>>> 10218d98464759b286f73ef7b3732651f7a45ec8
     }
     
     /**
@@ -63,14 +55,10 @@ public class BlueprintsServices {
      * @throws BlueprintNotFoundException if there is no such blueprint
      */
     public Blueprint getBlueprint(String author,String name) throws BlueprintNotFoundException{
-<<<<<<< HEAD
         Blueprint blueprint;
         blueprint = bpp.getBlueprint(author, name);
         blueprint = filter.applyFilter(blueprint);
         return blueprint;
-=======
-        return bpp.getBlueprint(author, name);
->>>>>>> 10218d98464759b286f73ef7b3732651f7a45ec8
     }
     
     /**
@@ -80,7 +68,6 @@ public class BlueprintsServices {
      * @throws BlueprintNotFoundException if the given author doesn't exist
      */
     public Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException{
-<<<<<<< HEAD
         Set<Blueprint> blueprints = bpp.getBlueprintsByAuthor(author);
         Set<Blueprint> blueprintsFiltered = new HashSet<>();
         for(Blueprint bp: blueprints){
@@ -88,9 +75,6 @@ public class BlueprintsServices {
             blueprintsFiltered.add(bp);
         }
         return blueprintsFiltered;
-=======
-        return bpp.getBlueprintByAuthor(author);
->>>>>>> 10218d98464759b286f73ef7b3732651f7a45ec8
     }
         
 }
