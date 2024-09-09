@@ -13,7 +13,6 @@ import edu.eci.arsw.blueprints.services.BlueprintsServices;
 
 public class Main {
 
-
     public static void main(String a[]) throws BlueprintNotFoundException {
         ApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
         BlueprintsServices bpps = appContext.getBean(BlueprintsServices.class);

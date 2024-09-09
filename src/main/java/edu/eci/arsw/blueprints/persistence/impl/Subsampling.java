@@ -3,6 +3,7 @@ package edu.eci.arsw.blueprints.persistence.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import edu.eci.arsw.blueprints.model.Blueprint;
 import edu.eci.arsw.blueprints.model.Point;
@@ -20,6 +21,13 @@ public class Subsampling implements Filter{
         }
         bp.setPoints(newPoints);
         return bp;
+    }
+    @Override
+    public Set<Blueprint> multiFilterBlueprint(Set<Blueprint> blueprints) {
+        for (Blueprint blueprint : blueprints) {
+            applyFilter(blueprint);
+        }
+        return blueprints;
     }
     
 }

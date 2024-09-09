@@ -1,6 +1,7 @@
 package edu.eci.arsw.blueprints.persistence.impl;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,14 @@ public class DuplicateFilter implements Filter {
         }
         bp.setPoints(removeRepeatedPoints(repeatedPoints, originalPoints));
         return bp;
+    }
+
+    @Override
+    public Set<Blueprint> multiFilterBlueprint(Set<Blueprint> bps) {
+        for (Blueprint blueprint : bps) {
+            applyFilter(blueprint);
+        }
+        return bps;
     }
 
     public List<Point> removeRepeatedPoints(List<Point> repeatedPoints, List<Point> ptsAll) {

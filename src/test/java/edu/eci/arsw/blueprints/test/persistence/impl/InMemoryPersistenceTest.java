@@ -10,6 +10,9 @@ import edu.eci.arsw.blueprints.model.Point;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.persistence.impl.InMemoryBlueprintPersistence;
+
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Test;
@@ -41,7 +44,6 @@ public class InMemoryPersistenceTest {
         
     }
 
-
     @Test
     public void saveExistingBpTest() {
         InMemoryBlueprintPersistence ibpp=new InMemoryBlueprintPersistence();
@@ -65,10 +67,39 @@ public class InMemoryPersistenceTest {
         catch (BlueprintPersistenceException ex){
             
         }
-                
         
     }
 
+    @Test
+    public void findBlueprintsWithExistingAuthor() throws BlueprintPersistenceException, BlueprintNotFoundException {
+        InMemoryBlueprintPersistence imbp = new InMemoryBlueprintPersistence();
 
+        Point[] p1 = new Point[]{new Point(0,0), new Point(15,15)};
+        Point[] p2 = new Point[]{new Point(25,0), new Point(0,25)};
+        Point[] p3 = new Point[]{new Point(0,0), new Point(15,15)};
+
+        Blueprint bp1 = new Blueprint("Tomas", "nombre1");
+        Blueprint bp2 = new Blueprint("Tomas", "nombre2");
+        Blueprint bp3 = new Blueprint("Tomas", "nombre3");
+
+        imbp.saveBlueprint(bp1);
+        imbp.saveBlueprint(bp2);
+        imbp.saveBlueprint(bp3);
+
+        Set<Blueprint> TomasPrints = imbp.getBlueprintsByAuthor("Tomas");
+        Set<Blueprint> expectedPrints = new HashSet<>();
+        expectedPrints.add(bp1);
+        expectedPrints.add(bp2);
+        expectedPrints.add(bp3);
+
+        assertEquals(expectedPrints, TomasPrints);
+    }
+
+    @Test
+    public void findNonExistingAutors() throws BlueprintNotFoundException {
+        InMemoryBlueprintPersistence imbp = new InMemoryBlueprintPersistence();
+        Set<Blueprint> emptyBlueprint = imbp.getBlueprintsByAuthor("Empty");
+        assertEquals(emptyBlueprint.size(), 0);
+    }
     
 }
