@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import edu.eci.arsw.blueprints.model.Blueprint;
@@ -23,9 +24,11 @@ import edu.eci.arsw.blueprints.persistence.Filter;
 public class BlueprintsServices {
    
     @Autowired
-    BlueprintsPersistence bpp=null;
+    @Qualifier(value = "inMemoryBluePrintPersistence")
+    BlueprintsPersistence bpp;
+
     @Autowired
-    Filter filter;
+    FilterServices filter;
     
     public void addNewBlueprint(Blueprint bp){
         try {
@@ -57,7 +60,7 @@ public class BlueprintsServices {
     public Blueprint getBlueprint(String author,String name) throws BlueprintNotFoundException{
         Blueprint blueprint;
         blueprint = bpp.getBlueprint(author, name);
-        blueprint = filter.applyFilter(blueprint);
+        filter.applyFilter(blueprint);
         return blueprint;
     }
     
@@ -71,7 +74,7 @@ public class BlueprintsServices {
         Set<Blueprint> blueprints = bpp.getBlueprintsByAuthor(author);
         Set<Blueprint> blueprintsFiltered = new HashSet<>();
         for(Blueprint bp: blueprints){
-            bp = filter.applyFilter(bp);
+            filter.applyFilter(bp);
             blueprintsFiltered.add(bp);
         }
         return blueprintsFiltered;

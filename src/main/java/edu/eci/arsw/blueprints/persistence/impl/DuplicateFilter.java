@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import edu.eci.arsw.blueprints.model.Blueprint;
@@ -11,15 +12,8 @@ import edu.eci.arsw.blueprints.persistence.Filter;
 
 
 @Service
+@Qualifier("DuplicatedFilter")
 public class DuplicateFilter implements Filter {
-
-    public boolean areEquals(Point p1, Point p2) {
-        boolean flag = false;
-        if (p1.getX() == p2.getX() && p1.getY() == p2.getY()) {
-            flag = true;
-        }
-        return flag;
-    }
     
     @Override
     public Blueprint applyFilter(Blueprint bp) {
@@ -43,6 +37,14 @@ public class DuplicateFilter implements Filter {
             applyFilter(blueprint);
         }
         return bps;
+    }
+
+    public boolean areEquals(Point p1, Point p2) {
+        boolean flag = false;
+        if (p1.getX() == p2.getX() && p1.getY() == p2.getY()) {
+            flag = true;
+        }
+        return flag;
     }
 
     public List<Point> removeRepeatedPoints(List<Point> repeatedPoints, List<Point> ptsAll) {
