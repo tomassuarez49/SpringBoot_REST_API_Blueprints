@@ -28,7 +28,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>6.1.12</version>
+            <version>6.1.20</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -38,7 +38,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot</artifactId>
-            <version>3.2.3</version>
+            <version>3.3.7</version>
         </dependency>
 
     </dependencies>
